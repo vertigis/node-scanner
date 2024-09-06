@@ -1,0 +1,11 @@
+{
+  "name": "node-scanner",
+  "version": "1.0.0",
+  "description": "An extension of is-my-node-vulnerable package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "VertiGIS",
+  "license": "MIT"
+}

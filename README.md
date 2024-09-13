@@ -7,7 +7,7 @@ This CLI tool is used in conjunction with [`is-my-node-vulnerable`](https://gith
 
 After installation, this tool can be run as follows:
 
-`npx node-scanner`
+`npx --yes @vertigis/node-scanner`
 
 ### Ignoring vulnerabilities
 

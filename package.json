@@ -1,5 +1,5 @@
 {
-  "name": "node-scanner",
+  "name": "@vertigis/node-scanner",
   "version": "1.0.0",
   "description": "An extension of is-my-node-vulnerable package",
   "main": "index.js",

@@ -6,40 +6,24 @@ on:
             - main
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
+  release:
+      runs-on: ubuntu-latest
+      if: github.ref == 'refs/heads/main'
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
 
-            - name: Use Node.js 20
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20.x
+        # Setup .npmrc file to publish to npm
+        - name: Setup npmrc
+          uses: actions/setup-node@v4
+          with:
+            node-version: '20.x'
+            registry-url: 'https://registry.npmjs.org'
 
-            - run: npm install
+        - name: install
+          run: npm install
 
-            - run: npm run test
-
-    release:
-        runs-on: ubuntu-latest
-        needs:
-            - test
-        if: github.ref == 'refs/heads/main'
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v4
-
-          # Setup .npmrc file to publish to npm
-          - name: Setup npmrc
-            uses: actions/setup-node@v4
-            with:
-              node-version: '20.x'
-              registry-url: 'https://registry.npmjs.org'
-
-          - name: install
-            run: npm install
-
-          - name: Publish
-            run: npm publish --access public
-            env:
-              NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        - name: Publish
+          run: npm publish --access public
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

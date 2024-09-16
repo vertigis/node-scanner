@@ -17,6 +17,10 @@ jobs:
               fetch-depth: "0"
               persist-credentials: false
 
+        # Pulls all tags (needed for semantic release to correctly version)
+        - name: Fetch git tags
+          run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
         - name: Use Node.js 20
           uses: actions/setup-node@v4
           with:
@@ -24,12 +28,6 @@ jobs:
 
         - run: npm install
         
-        - name: Download release artifact
-          uses: actions/download-artifact@v3
-          with:
-              name: release
-              path: release
-
         - name: Release 🚀
           env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
